@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using RestSharp;
 
-namespace WebapiWithHealthChecks.Services.Health.apis
+namespace WebapiWithHealthChecks.Services.Health.apis.Jokes
 {
-    public class ApihealthChecks : IHealthCheck
+    public class ChuckNorrisJokesApihealthChecks : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
@@ -13,9 +13,9 @@ namespace WebapiWithHealthChecks.Services.Health.apis
             request.AddHeader("accept", "application/json");
             request.AddHeader("X-RapidAPI-Key", "c5e3a2e511msh88bfd7e7cb99b2ap10145bjsnec94f6ab89e8");
             request.AddHeader("X-RapidAPI-Host", "matchilling-chuck-norris-jokes-v1.p.rapidapi.com");
-      
+
             var response = client.Execute(request, cancellationToken: cancellationToken);
-            if(response.IsSuccessful)
+            if (response.IsSuccessful)
             {
                 return Task.FromResult(HealthCheckResult.Healthy("Healthy result from ApihealthChecks"));
             }
@@ -23,7 +23,6 @@ namespace WebapiWithHealthChecks.Services.Health.apis
             {
                 return Task.FromResult(HealthCheckResult.Unhealthy("Unhealthy result from ApihealthChecks"));
             }
-
 
         }
     }
